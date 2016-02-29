@@ -9,9 +9,9 @@ public class PlayerBehaviour : MonoBehaviour {
 	{
 		public float runVelocity = 12;
 		public float rotateVelocity = 100;
-		public float jumpVelocity = 8;
+		/*public float jumpVelocity = 8;
 		public float distanceToGround = 1.3f;
-		public LayerMask ground;
+		public LayerMask ground;*/
 	}
 
 	[System.Serializable]
@@ -30,13 +30,13 @@ public class PlayerBehaviour : MonoBehaviour {
 	private Quaternion targetRotation;
 	private float forwardInput, sidewaysInput, turnInput, jumpInput;
 
-	bool Grounded()
+	/*bool Grounded()
 	{
 
 		return 
 			Physics.Raycast(transform.position, Vector3.down,
 		                moveSettings.distanceToGround, moveSettings.ground);
-	}
+	}*/
 	void Awake () 
 	{
 		velocity = Vector3.zero;
@@ -55,7 +55,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	void FixedUpdate()
 	{
 		Run ();
-		Jump ();
+		//Jump ();
 	}
 	void GetInput()
 	{
@@ -93,7 +93,7 @@ public class PlayerBehaviour : MonoBehaviour {
 		}
 		transform.rotation = targetRotation;
 	}
-	void Jump()
+	/*void Jump()
 	{
 		Debug.Log("Jump called ! before ıf" + Grounded());
 		if ((jumpInput != 0) && Grounded())
@@ -104,6 +104,6 @@ public class PlayerBehaviour : MonoBehaviour {
 				moveSettings.jumpVelocity, 
 				playerRigidbody.velocity.z);
 		}
-	}
+	}*/
 
 }
