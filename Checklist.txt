@@ -4,7 +4,7 @@ Must-Have:
 -Spielname
 -Spielfigur: 1. Steuerung und Kamera
 -Module: 1.Prefabs
--Graphik: 1. Texture 2.Tiling
+-Graphik: 1. Texture
 -Monster: 1.Ghosts 1.5 normale Monster 2. Zerstörung
 -Animation
 -Path-Finding
