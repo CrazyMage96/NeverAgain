@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using UnityEngine.UI;
 using System.Collections;
 
 public class GameData
 {
+	public static GameObject text;
+	public int points = 0;
+	public string score= "Score";
 	private static GameData instance;
-	
+	 
 	private GameData()
 	{
 		if(instance != null)
@@ -29,9 +32,15 @@ public class GameData
 		}
 	}
 
+
 	public int Punkte {
-		get;
-		set;
+
+		get {
+			return points;}
+		set {text = GameObject.Find("Text");
+			points = value;
+			text.text = score+ " " + points;}
+		  
 	}
 
 
