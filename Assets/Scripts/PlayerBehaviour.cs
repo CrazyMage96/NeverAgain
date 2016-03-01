@@ -9,9 +9,6 @@ public class PlayerBehaviour : MonoBehaviour {
 	{
 		public float runVelocity = 12;
 		public float rotateVelocity = 100;
-		/*public float jumpVelocity = 8;
-		public float distanceToGround = 1.3f;
-		public LayerMask ground;*/
 	}
 
 	[System.Serializable]
@@ -19,29 +16,18 @@ public class PlayerBehaviour : MonoBehaviour {
 	{
 		public string FORWARD_AXIS = "Vertical";
 		public string SIDEWAYS_AXIS = "Horizontal";
-		public string TURN_AXIS = "Mouse X";
-		public string JUMP_AXIS = "Jump";
 	}
 	public MoveSettings moveSettings;
 	public InputSettings inputSettings;
 
 	private Rigidbody playerRigidbody;
 	private Vector3 velocity;
-	private Quaternion targetRotation;
-	private float forwardInput, sidewaysInput, turnInput, jumpInput;
+	private float forwardInput, sidewaysInput;
 
-	/*bool Grounded()
-	{
-
-		return 
-			Physics.Raycast(transform.position, Vector3.down,
-		                moveSettings.distanceToGround, moveSettings.ground);
-	}*/
 	void Awake () 
 	{
 		velocity = Vector3.zero;
-		forwardInput = sidewaysInput = turnInput = jumpInput = 0;
-		targetRotation = transform.rotation;
+		forwardInput = sidewaysInput = 0;
 		playerRigidbody = gameObject.GetComponent<Rigidbody>();
 	}
 	
@@ -49,13 +35,11 @@ public class PlayerBehaviour : MonoBehaviour {
 	void Update () 
 	{
 		GetInput ();
-		Turn ();
 	}
 
 	void FixedUpdate()
 	{
 		Run ();
-		//Jump ();
 	}
 	void GetInput()
 	{
@@ -67,43 +51,31 @@ public class PlayerBehaviour : MonoBehaviour {
 		{
 			sidewaysInput = Input.GetAxis(inputSettings.SIDEWAYS_AXIS);
 		}
-		if (inputSettings.TURN_AXIS.Length != 0)
-		{
-			turnInput = Input.GetAxis(inputSettings.TURN_AXIS);
-		}
-		if (inputSettings.JUMP_AXIS.Length != 0)
-		{
-			jumpInput = Input.GetAxisRaw(inputSettings.JUMP_AXIS);
-		}
 	}
 	void Run()
 	{
 		velocity.z = forwardInput * moveSettings.runVelocity;
 		velocity.x = sidewaysInput * moveSettings.runVelocity;
 		velocity.y = playerRigidbody.velocity.y;
+		playerRigidbody.velocity = velocity; //Bewegung des Spielers wird direkt auf die globale Koordinate übergeben
 
-		playerRigidbody.velocity = transform.TransformDirection (velocity);
-	}
-	void Turn()
-	{
-		if (Mathf.Abs(turnInput) > 0)
+		if (forwardInput < 0)
 		{
-			targetRotation *= Quaternion.AngleAxis(moveSettings.rotateVelocity *
-			                                       turnInput * Time.deltaTime, Vector3.up);
+			transform.rotation = Quaternion.AngleAxis(-180, Vector3.up);
 		}
-		transform.rotation = targetRotation;
-	}
-	/*void Jump()
-	{
-		Debug.Log("Jump called ! before ıf" + Grounded());
-		if ((jumpInput != 0) && Grounded())
+		else if (forwardInput > 0) 
+		{ 
+			transform.rotation = Quaternion.AngleAxis(0, Vector3.up); 
+		}
+		if (sidewaysInput < 0)
 		{
-			Debug.Log("Jump called !");
-			playerRigidbody.velocity = new Vector3(
-				playerRigidbody.velocity.x, 
-				moveSettings.jumpVelocity, 
-				playerRigidbody.velocity.z);
+			transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
 		}
-	}*/
+		else if (sidewaysInput > 0)
+		{
+			transform.rotation = Quaternion.AngleAxis(90,Vector3.up);
+			
+		}
 
+	}
 }
