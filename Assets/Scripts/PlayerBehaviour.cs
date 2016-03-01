@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (Rigidbody))]
+[RequireComponent (typeof (Animator))]
 public class PlayerBehaviour : MonoBehaviour {
 
 	private string FORWARD_AXIS = "Vertical";
@@ -9,6 +10,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	public float runVelocity = 12;
 
 	private Rigidbody playerRigidbody;
+	private Animator animator;
 	private Vector3 velocity;
 	private float forwardInput, sidewaysInput;
 
@@ -17,6 +19,7 @@ public class PlayerBehaviour : MonoBehaviour {
 		velocity = Vector3.zero;
 		forwardInput = sidewaysInput = 0;
 		playerRigidbody = gameObject.GetComponent<Rigidbody>();
+		animator = gameObject.GetComponent<Animator>();
 	}
 	
 
@@ -31,17 +34,20 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 	void GetInput()
 	{
-		if (FORWARD_AXIS.Length != 0)
-		{
-			forwardInput = Input.GetAxis(FORWARD_AXIS);
+		if (FORWARD_AXIS.Length != 0) {
+			forwardInput = Input.GetAxis (FORWARD_AXIS);
 		}
-		if (SIDEWAYS_AXIS.Length != 0)
-		{
-			sidewaysInput = Input.GetAxis(SIDEWAYS_AXIS);
+		if (SIDEWAYS_AXIS.Length != 0) {
+			sidewaysInput = Input.GetAxis (SIDEWAYS_AXIS);
 		}
 	}
 	void Run()
 	{
+		if (forwardInput != 0 || sidewaysInput != 0) {
+			animator.SetBool ("walk", true);
+		} else {
+			animator.SetBool ("walk", false);
+		}
 		velocity.z = forwardInput * runVelocity;
 		velocity.x = sidewaysInput * runVelocity;
 		velocity.y = playerRigidbody.velocity.y;
