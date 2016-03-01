@@ -4,21 +4,9 @@ using System.Collections;
 [RequireComponent (typeof (Rigidbody))]
 public class PlayerBehaviour : MonoBehaviour {
 
-	[System.Serializable]
-	public class MoveSettings 
-	{
-		public float runVelocity = 12;
-		public float rotateVelocity = 100;
-	}
-
-	[System.Serializable]
-	public class InputSettings 
-	{
-		public string FORWARD_AXIS = "Vertical";
-		public string SIDEWAYS_AXIS = "Horizontal";
-	}
-	public MoveSettings moveSettings;
-	public InputSettings inputSettings;
+	private string FORWARD_AXIS = "Vertical";
+	private string SIDEWAYS_AXIS = "Horizontal";
+	public float runVelocity = 12;
 
 	private Rigidbody playerRigidbody;
 	private Vector3 velocity;
@@ -43,19 +31,19 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 	void GetInput()
 	{
-		if (inputSettings.FORWARD_AXIS.Length != 0)
+		if (FORWARD_AXIS.Length != 0)
 		{
-			forwardInput = Input.GetAxis(inputSettings.FORWARD_AXIS);
+			forwardInput = Input.GetAxis(FORWARD_AXIS);
 		}
-		if (inputSettings.SIDEWAYS_AXIS.Length != 0)
+		if (SIDEWAYS_AXIS.Length != 0)
 		{
-			sidewaysInput = Input.GetAxis(inputSettings.SIDEWAYS_AXIS);
+			sidewaysInput = Input.GetAxis(SIDEWAYS_AXIS);
 		}
 	}
 	void Run()
 	{
-		velocity.z = forwardInput * moveSettings.runVelocity;
-		velocity.x = sidewaysInput * moveSettings.runVelocity;
+		velocity.z = forwardInput * runVelocity;
+		velocity.x = sidewaysInput * runVelocity;
 		velocity.y = playerRigidbody.velocity.y;
 		playerRigidbody.velocity = velocity; //Bewegung des Spielers wird direkt auf die globale Koordinate übergeben
 
