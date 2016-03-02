@@ -26,6 +26,9 @@ public class PlayerBehaviour : MonoBehaviour {
 	void Update () 
 	{
 		GetInput ();
+		if (transform.position.y < -10) {
+			Application.LoadLevel ("GameOver");
+		}
 	}
 
 	void FixedUpdate()
