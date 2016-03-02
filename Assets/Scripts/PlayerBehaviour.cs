@@ -72,4 +72,10 @@ public class PlayerBehaviour : MonoBehaviour {
 		}
 
 	}
+	void OnCollisionEnter(Collision collision){
+		Debug.Log ("We hit: " + collision.gameObject.name);
+		if (collision.gameObject.tag == "Enemy")
+			Application.LoadLevel ("GameOver");
+	}
 }
+
