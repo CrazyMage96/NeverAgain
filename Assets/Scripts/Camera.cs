@@ -4,8 +4,6 @@ using System.Collections;
 public class Camera : MonoBehaviour {
 
     [SerializeField]
-    private float distanceAway;
-    [SerializeField]
     private float distanceUp;
     [SerializeField]
     private float smooth;
@@ -18,7 +16,7 @@ public class Camera : MonoBehaviour {
     void LateUpdate()
     {
        // toPosition = followedObject.position + Vector3.up * distanceUp - followedObject.forward * distanceAway;
-        toPosition = followedObject.position + Vector3.up * 5;
+        toPosition = followedObject.position + Vector3.up * distanceUp;
         transform.position = toPosition;
         transform.LookAt(followedObject);
     }
