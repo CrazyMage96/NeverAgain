@@ -9,14 +9,14 @@ public class Module : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision bit)
     {
-        Debug.Log("first collide ");
+        //Debug.Log("first collide ");
         if (bit.gameObject == GameObject.Find("Player"))
         {
 
-            Debug.Log("second collide ");
+            //Debug.Log("second collide ");
             if (ID != 0)
             {
-                Debug.Log("collision detected " + ID);
+                //Debug.Log("collision detected " + ID);
 
                 GameObject placeholder = GameObject.FindGameObjectWithTag("GameController");
                 Controler skript = placeholder.GetComponent<Controler>();

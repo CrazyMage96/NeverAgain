@@ -2,14 +2,11 @@
 using System.Collections;
 
 public class Ghost : MonoBehaviour {
+    public float speed;
+    public GameObject player;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
+    }
 }

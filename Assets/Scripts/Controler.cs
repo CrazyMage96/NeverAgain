@@ -48,6 +48,7 @@ public class Controler : MonoBehaviour {
     {
         if (change)
         {
+            Debug.Log("Destination:" + destination);
             Remove();
             ChangeNumbers();//change remaining two numbers
             MoveTwo();//move those two to their positions, change Verbindung
@@ -150,13 +151,13 @@ public class Controler : MonoBehaviour {
     {
         Vector3 placeholder = transform.position;
 
-        if (destination == 1) { placeholder.x -= distance / 2 - fixFaktor; placeholder.y = 1; placeholder.z = player.transform.position.z; }//y hangt von grosse der player ab
+        if (destination == 1) { placeholder.x -= distance / 2; placeholder.y = 1; placeholder.z = player.transform.position.z; }//y hangt von grosse der player ab
         else
-            if (destination == 2) { placeholder.z += distance / 2 - fixFaktor; placeholder.y = 1; placeholder.x = player.transform.position.x; }
+            if (destination == 2) { placeholder.z += distance / 2; placeholder.y = 1; placeholder.x = player.transform.position.x; }
         else
-            if (destination == 3) { placeholder.x += distance / 2 - fixFaktor; placeholder.y = 1; placeholder.z = player.transform.position.z; }
+            if (destination == 3) { placeholder.x += distance / 2; placeholder.y = 1; placeholder.z = player.transform.position.z; }
         else
-            if (destination == 4) { placeholder.z -= distance / 2 - fixFaktor; placeholder.y = 1; placeholder.x = player.transform.position.x; }
+            if (destination == 4) { placeholder.z -= distance / 2; placeholder.y = 1; placeholder.x = player.transform.position.x; }
         player.transform.position = placeholder;
     }
     void Spawn()
