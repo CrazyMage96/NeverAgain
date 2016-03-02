@@ -5,8 +5,8 @@ public class Controler : MonoBehaviour {
 
     public GameObject[] possibleModules;
     public GameObject player;
-    public static float fixFaktor = 0.5f;
-    public static float distance = 10f + fixFaktor;
+    public static float fixFaktor = 0.1f;
+    public static float distance = 10f;
 
     // 5 Gameobjects 
     public GameObject middle;//0
