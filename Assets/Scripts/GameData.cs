@@ -1,5 +1,8 @@
 ﻿using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
+
+
 
 public class GameData
 {
@@ -39,7 +42,7 @@ public class GameData
 			return points;}
 		set {text = GameObject.Find("Text");
 			points = value;
-			text.text = score+ " " + points;}
+			text.GetComponent<UnityEngine.UI.Text>().text = score+ " " + points;}
 		  
 	}
 
