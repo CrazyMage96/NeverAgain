@@ -36,7 +36,7 @@ public class Controler : MonoBehaviour
     private Vector3 positionTop = new Vector3(0, 0, distance);
 
 
-
+    public Light spotlight; 
     private GameObject remainingMiddle;
     private GameObject remainingSide;
 
@@ -52,6 +52,9 @@ public class Controler : MonoBehaviour
     public int destination = 0; // platform player is at changed bz module
     public int zombieScore;
     public int ghostScore;
+
+    private static int cooldownMax = 2;
+    private int cooldown = cooldownMax;
 
     // platform array random choose method
     GameObject[] ManyModules;
@@ -75,14 +78,19 @@ public class Controler : MonoBehaviour
         {
             SpawnGhosts();
             timeOut = false;
-            //cooldown--;
+            cooldown++;
         }
-        
-        if (destructionTime)
+        if (cooldown < cooldownMax)
         {
-            DestroyGhosts();
-            destructionTime = false;
-            
+            spotlight.intensity = 0;
+        }
+        else {
+            if (destructionTime)
+            {
+                DestroyGhosts();
+                destructionTime = false;
+
+            }
         }
     }
 
@@ -505,11 +513,10 @@ public class Controler : MonoBehaviour
         {
             if (rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position))
             {
-                 Destroy(ghosts[i]);
+                Destroy(ghosts[i]);
 				ScoreManager.score+=ghostScore;
-
-
-                 
+                cooldown = 0;
+                
             }
         }
 
