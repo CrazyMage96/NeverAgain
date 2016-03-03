@@ -85,6 +85,7 @@ public class Controler : MonoBehaviour
             spotlight.intensity = 0;
         }
         else {
+            spotlight.intensity = 8;
             if (destructionTime)
             {
                 DestroyGhosts();
@@ -517,6 +518,7 @@ public class Controler : MonoBehaviour
                     Destroy(ghosts[i]);
                     ScoreManager.score += ghostScore;
                     cooldown = 0;
+                    destructionTime = false;
                 }
             }
 
