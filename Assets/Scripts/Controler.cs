@@ -177,13 +177,13 @@ public class Controler : MonoBehaviour
     {
         Vector3 placeholder = player.transform.position;
 
-        if (destination == 1) { placeholder.x -= distance; placeholder.y = 1; placeholder.z = player.transform.position.z; }//y hangt von grosse der player ab
+        if (destination == 1) { placeholder.x -= distance;  placeholder.z = player.transform.position.z; }//y hangt von grosse der player ab
         else
-            if (destination == 2) { placeholder.z += distance; placeholder.y = 1; placeholder.x = player.transform.position.x; }
+            if (destination == 2) { placeholder.z += distance; placeholder.x = player.transform.position.x; }
         else
-            if (destination == 3) { placeholder.x += distance; placeholder.y = 1; placeholder.z = player.transform.position.z; }
+            if (destination == 3) { placeholder.x += distance;  placeholder.z = player.transform.position.z; }
         else
-            if (destination == 4) { placeholder.z -= distance; placeholder.y = 1; placeholder.x = player.transform.position.x; }
+            if (destination == 4) { placeholder.z -= distance;  placeholder.x = player.transform.position.x; }
         player.transform.position = placeholder;
     }
     void moveMonsters()
