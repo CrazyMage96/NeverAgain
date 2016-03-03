@@ -76,8 +76,8 @@ public class PlayerBehaviour : MonoBehaviour {
 
 	}
 	void OnCollisionEnter(Collision collision){
-		Debug.Log ("We hit: " + collision.gameObject.name);
-		if (collision.gameObject.tag == "Enemy")
+		//Debug.Log ("We hit: " + collision.gameObject.name);
+		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Ghost")
 			Application.LoadLevel ("GameOver");
 	}
 }
