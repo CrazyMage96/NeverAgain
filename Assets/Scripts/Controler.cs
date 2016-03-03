@@ -50,12 +50,15 @@ public class Controler : MonoBehaviour {
         {
             Debug.Log("Destination:" + destination);
             Remove();
+            MovePlayer();
+            moveMonsters();
             ChangeNumbers();//change remaining two numbers
             MoveTwo();//move those two to their positions, change Verbindung
-            MovePlayer();
-            //(move monsters)
-            Spawn();
+           
+            SpawnPlatforms();
+            //SpawnMonsters
             change = false;
+            destination = 0;
 
         }
     }
@@ -149,18 +152,142 @@ public class Controler : MonoBehaviour {
     }
     void MovePlayer()
     {
-        Vector3 placeholder = transform.position;
+        Vector3 placeholder = player.transform.position;
 
-        if (destination == 1) { placeholder.x -= distance / 2; placeholder.y = 1; placeholder.z = player.transform.position.z; }//y hangt von grosse der player ab
+        if (destination == 1) { placeholder.x -= distance; placeholder.y = 1; placeholder.z = player.transform.position.z; }//y hangt von grosse der player ab
         else
-            if (destination == 2) { placeholder.z += distance / 2; placeholder.y = 1; placeholder.x = player.transform.position.x; }
+            if (destination == 2) { placeholder.z += distance; placeholder.y = 1; placeholder.x = player.transform.position.x; }
         else
-            if (destination == 3) { placeholder.x += distance / 2; placeholder.y = 1; placeholder.z = player.transform.position.z; }
+            if (destination == 3) { placeholder.x += distance; placeholder.y = 1; placeholder.z = player.transform.position.z; }
         else
-            if (destination == 4) { placeholder.z -= distance / 2; placeholder.y = 1; placeholder.x = player.transform.position.x; }
+            if (destination == 4) { placeholder.z -= distance; placeholder.y = 1; placeholder.x = player.transform.position.x; }
         player.transform.position = placeholder;
     }
-    void Spawn()
+    void moveMonsters()
+    {
+        //Debug.Log("MoveGhost");
+        GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        for (int i=0;i<ghosts.Length ;i++)
+        {
+            Vector3 placeholder = ghosts[i].transform.position;
+
+            if (destination == 1) { placeholder.x -= distance; placeholder.y = 1;  }//y hangt von grosse der player ab
+            else
+                if (destination == 2) { placeholder.z += distance; placeholder.y = 1; }
+            else
+                if (destination == 3) { placeholder.x += distance; placeholder.y = 1; }
+            else
+                if (destination == 4) { placeholder.z -= distance; placeholder.y = 1; }
+
+            ghosts[i].transform.position = placeholder;
+        }
+
+        /*int anti = 0;
+        if (destination == 1) { anti = destination + 2; }
+        else if (destination == 2) { anti = destination + 2; }
+        else
+        if (destination == 3) { anti = destination - 2; }
+        else if (destination == 4) { anti = destination - 2; }
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Enemy enemyScript = enemies[i].GetComponent<Enemy>();
+
+
+
+
+            if(enemyScript.platformID != 0 && enemyScript.platformID != anti)
+            {
+                Debug.Log("-----------------we destroyed at "+destination);
+                Destroy(enemies[i]);     
+            }
+            else
+
+
+            if (enemyScript.platformID == 0 || enemyScript.platformID == destination)
+            {
+                Vector3 placeholder = enemies[i].transform.position;
+
+                if (destination == 1) { placeholder.x -= distance; placeholder.y = 1; }//y hangt von grosse der player ab
+                else
+                    if (destination == 2) { placeholder.z += distance; placeholder.y = 1; }
+                else
+                    if (destination == 3) { placeholder.x += distance; placeholder.y = 1; }
+                else
+                    if (destination == 4) { placeholder.z -= distance; placeholder.y = 1; }
+
+                enemies[i].transform.position = placeholder;
+            }
+           
+            
+        }*/
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Debug.Log("Enemies: " + enemies[i]);
+            Debug.Log("Position: " + enemies[i].transform.position);
+            Vector3 placeholder = enemies[i].transform.position;
+            if (destination == 1)
+            {
+                if (enemies[i].transform.position.x <=15f && enemies[i].transform.position.x >= -5f && 
+                    enemies[i].transform.position.z<=5f && enemies[i].transform.position.z >= -5f)
+                {
+                    placeholder.x -= distance; placeholder.y = 1;
+                    enemies[i].transform.position = placeholder;
+                }
+                else
+                {
+                    Destroy(enemies[i]);
+                }
+            }else
+            if (destination == 2)
+            {
+                if (enemies[i].transform.position.x <= 5f && enemies[i].transform.position.x >= -5f && 
+                    enemies[i].transform.position.z <= 5f && enemies[i].transform.position.z >= -15f)
+                {
+                    placeholder.z += distance; placeholder.y = 1;
+                    enemies[i].transform.position = placeholder;
+                }
+                else
+                {
+                    Destroy(enemies[i]);
+                }
+            }
+            else
+            if (destination == 3)
+            {
+                if (enemies[i].transform.position.x <= 5f && enemies[i].transform.position.x >= -5f && 
+                    enemies[i].transform.position.z <= 15f && enemies[i].transform.position.z >= -5f)
+                {
+                    placeholder.x += distance; placeholder.y = 1;
+                    enemies[i].transform.position = placeholder;
+                }
+                else
+                {
+                    Destroy(enemies[i]);
+                }
+            }
+            else
+            if (destination == 4)
+            {
+                if (enemies[i].transform.position.x <= 15f && enemies[i].transform.position.x >= -5f && 
+                    enemies[i].transform.position.z <= 5f && enemies[i].transform.position.z >= -5f)
+                {
+                    placeholder.z -= distance; placeholder.y = 1;
+                    enemies[i].transform.position = placeholder;
+                }
+                else
+                {
+                    Destroy(enemies[i]);
+                }
+            }
+            
+        }
+
+    }
+    void SpawnPlatforms()
     {
         int anti = 0;
         if (destination == 1  ) { anti = destination + 2; }
@@ -171,17 +298,17 @@ public class Controler : MonoBehaviour {
 
 
         for (int i=1; i<=4;i++) {
-            Debug.Log("anti in for: "+anti);
+            //Debug.Log("anti in for: "+anti);
             Vector3 locartion = new Vector3(0,0,0);
             
 
-            if (i == 1) {locartion= new Vector3(distance, 0, 0);   Debug.Log("Created a right"); }
+            if (i == 1) {locartion= new Vector3(distance, 0, 0);   /*Debug.Log("Created a right");*/ }
             else
-            if (i == 2) { locartion = new Vector3(0, 0, -distance); Debug.Log("Created a bottom"); }
+            if (i == 2) { locartion = new Vector3(0, 0, -distance); /*Debug.Log("Created a bottom");*/ }
             else
-            if (i == 3) { locartion = new Vector3(-distance, 0, 0); Debug.Log("Created a left"); }
+            if (i == 3) { locartion = new Vector3(-distance, 0, 0); /*Debug.Log("Created a left");*/ }
             else
-            if (i == 4) { locartion = new Vector3(0, 0, distance); Debug.Log("Created a top"); }
+            if (i == 4) { locartion = new Vector3(0, 0, distance); /*Debug.Log("Created a top");*/ }
            
 
             if (i != anti)
@@ -209,5 +336,9 @@ public class Controler : MonoBehaviour {
         }
     
     }
+    void SpawnMonsters()
+    {
+        
 
+    }
 }
