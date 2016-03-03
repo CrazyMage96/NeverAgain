@@ -6,12 +6,14 @@ public class WallButtonBehaviour : MonoBehaviour {
 	private Renderer rend;
 	private Collider coll;
 	public GameObject wall;
+	private NavMeshObstacle obst;
 	
 	//public float time = 2f;
 	// Use this for initialization
 	void Start () {
 		rend = wall.GetComponent<Renderer>();
 		coll = wall.GetComponent<Collider>();
+		obst = wall.GetComponent<NavMeshObstacle> ();
 		//StartCoroutine (blinken(time));
 		
 	}
@@ -27,6 +29,7 @@ public class WallButtonBehaviour : MonoBehaviour {
 		{
 			coll.enabled = false;
 			rend.enabled = false;
+			obst.enabled = false;
 			gameObject.GetComponent<Renderer>().enabled = false;
 			gameObject.GetComponent<Collider>().enabled = false;
 		}
