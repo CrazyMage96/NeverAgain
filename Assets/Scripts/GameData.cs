@@ -7,7 +7,8 @@ using UnityEngine;
 public class GameData
 {
 	public static GameObject text;
-	public int points = 0;
+	public  int points = 0;
+
 	public string score= "Score";
 	private static GameData instance;
 	 
@@ -42,10 +43,16 @@ public class GameData
 			return points;}
 		set {text = GameObject.Find("Text");
 			points = value;
-			text.GetComponent<UnityEngine.UI.Text>().text = score+ " " + points;}
-		  
+			text.GetComponent<UnityEngine.UI.Text>().text = score+ " " + points;
+        }
+  
 	}
 
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 20), "TEXT TEXT A LOT OF TEXT");
+        GUI.Label(new Rect(-119, 85, 100, 20), points.ToString());
+    }
 
 	
 	public bool Paused

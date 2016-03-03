@@ -8,12 +8,13 @@ public class Controler : MonoBehaviour
     public GameObject player;
     public GameObject Zombie;
     public GameObject Ghost;
-
+    
  
 
     /////// HEAD
     public static float fixFaktor = 0f;
     public static float distance = 10f + fixFaktor;
+    public float rangeToDestroy = 2;
     /// <summary>
     /// ///
     /// </summary>
@@ -42,11 +43,14 @@ public class Controler : MonoBehaviour
     // change bool recieve and seperate value
     public bool change = false;
     public bool timeOut=false;
+    public bool destructionTime = false;
 
 
     // knows which platform has the player
 
     public int destination = 0; // platform player is at changed bz module
+    public int zombieScore;
+    public int ghostScore;
 
     // platform array random choose method
     GameObject[] ManyModules;
@@ -62,17 +66,19 @@ public class Controler : MonoBehaviour
             ChangeNumbers();//change remaining two numbers
             MoveTwo();//move those two to their positions, change Verbindung
             SpawnPlatforms();
-           SpawnZombies();
+            SpawnZombies();
             change = false;
             destination = 0;
         }
-        
-        //Debug.Log("TimeDelta: " + Time.deltaTime);
-        //Debug.Log("Time: " + timer);
         if (timeOut)
         {
             SpawnGhosts();
             timeOut = false;
+        }
+        if (destructionTime)
+        {
+            DestroyGhosts();
+            destructionTime = false;
         }
     }
 
@@ -195,47 +201,10 @@ public class Controler : MonoBehaviour
             ghosts[i].transform.position = placeholder;
         }
 
-        /*int anti = 0;
-        if (destination == 1) { anti = destination + 2; }
-        else if (destination == 2) { anti = destination + 2; }
-        else
-        if (destination == 3) { anti = destination - 2; }
-        else if (destination == 4) { anti = destination - 2; }
-
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            Enemy enemyScript = enemies[i].GetComponent<Enemy>();
 
+        
 
-
-
-            if(enemyScript.platformID != 0 && enemyScript.platformID != anti)
-            {
-                Debug.Log("-----------------we destroyed at "+destination);
-                Destroy(enemies[i]);     
-            }
-            else
-
-
-            if (enemyScript.platformID == 0 || enemyScript.platformID == destination)
-            {
-                Vector3 placeholder = enemies[i].transform.position;
-
-                if (destination == 1) { placeholder.x -= distance; placeholder.y = 1; }//y hangt von grosse der player ab
-                else
-                    if (destination == 2) { placeholder.z += distance; placeholder.y = 1; }
-                else
-                    if (destination == 3) { placeholder.x += distance; placeholder.y = 1; }
-                else
-                    if (destination == 4) { placeholder.z -= distance; placeholder.y = 1; }
-
-                enemies[i].transform.position = placeholder;
-            }
-           
-            
-        }*/
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -253,6 +222,8 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
+                    GameData.Instance.points +=zombieScore;
+
                 }
             }
             else
@@ -267,6 +238,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
+                    GameData.Instance.points += zombieScore;
                 }
             }
             else
@@ -281,6 +253,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
+                    GameData.Instance.points += zombieScore;
                 }
             }
             else
@@ -295,6 +268,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
+                    GameData.Instance.points += zombieScore;
                 }
             }
 
@@ -518,5 +492,17 @@ public class Controler : MonoBehaviour
         }
         GameObject placeHolder = Ghost;
         GameObject good = (GameObject)Instantiate(placeHolder, locartion, Quaternion.identity) as GameObject;
+    }
+    void DestroyGhosts()
+    {
+        GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            if(rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position))
+            {
+                Destroy(ghosts[i]);
+            }
+        }
     }
 }

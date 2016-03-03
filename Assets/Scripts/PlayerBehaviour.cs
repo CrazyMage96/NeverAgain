@@ -29,6 +29,13 @@ public class PlayerBehaviour : MonoBehaviour {
 		if (transform.position.y < -10) {
 			Application.LoadLevel ("GameOver");
 		}
+        //destroying Ghosts
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject placeholder = GameObject.FindGameObjectWithTag("GameController");
+            Controler skript = placeholder.GetComponent<Controler>();
+            skript.destructionTime = true;
+        }
 	}
 
 	void FixedUpdate()
