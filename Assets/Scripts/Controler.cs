@@ -7,6 +7,9 @@ public class Controler : MonoBehaviour
     public GameObject[] possibleModules;
     public GameObject player;
     public GameObject Zombie;
+    public GameObject Ghost;
+
+ 
 
     /////// HEAD
     public static float fixFaktor = 0f;
@@ -38,6 +41,7 @@ public class Controler : MonoBehaviour
 
     // change bool recieve and seperate value
     public bool change = false;
+    public bool timeOut=false;
 
 
     // knows which platform has the player
@@ -57,12 +61,18 @@ public class Controler : MonoBehaviour
             moveMonsters();
             ChangeNumbers();//change remaining two numbers
             MoveTwo();//move those two to their positions, change Verbindung
-
             SpawnPlatforms();
-            SpawnMonsters();
+           SpawnZombies();
             change = false;
             destination = 0;
-
+        }
+        
+        //Debug.Log("TimeDelta: " + Time.deltaTime);
+        //Debug.Log("Time: " + timer);
+        if (timeOut)
+        {
+            SpawnGhosts();
+            timeOut = false;
         }
     }
 
@@ -341,7 +351,7 @@ public class Controler : MonoBehaviour
         }
 
     }
-    void SpawnMonsters()
+    void SpawnZombies()
     {
         for (int i = 0; i <= 3; i++)
         {
@@ -485,5 +495,28 @@ public class Controler : MonoBehaviour
 
 
         }
+    }
+    void SpawnGhosts()
+    {
+        int index = Random.Range(0, 3);
+        Vector3 locartion = new Vector3(0, 0, 0);
+        if (index == 0)
+        {
+            locartion = new Vector3(10, 1, 10);
+        }
+        if (index == 1)
+        {
+            locartion = new Vector3(10, 1, -10);
+        }
+        if (index == 2)
+        {
+            locartion = new Vector3(-10, 1, -10);
+        }
+        if (index == 3)
+        {
+            locartion = new Vector3(-10, 1, 10);
+        }
+        GameObject placeHolder = Ghost;
+        GameObject good = (GameObject)Instantiate(placeHolder, locartion, Quaternion.identity) as GameObject;
     }
 }
