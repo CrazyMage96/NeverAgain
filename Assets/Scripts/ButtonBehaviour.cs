@@ -7,6 +7,8 @@ public class ButtonBehaviour : MonoBehaviour {
 	{
 		Application.LoadLevel(levelName);
 		Debug.Log("Button has been pressed");
+		ScoreManager.score=0;
+	
 	}
 
 	// Use this for initialization

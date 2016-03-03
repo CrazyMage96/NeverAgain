@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TimerScript : MonoBehaviour {
    public float timeLimit;
+	public int timePoints;
 	// Use this for initialization
 	void Start () {
 	
@@ -22,7 +23,7 @@ public class TimerScript : MonoBehaviour {
             GameObject placeholder = GameObject.FindGameObjectWithTag("GameController");
             Controler skript = placeholder.GetComponent<Controler>();
             skript.timeOut= true;
-
+			ScoreManager.score+=timePoints;
             timeLimit = 10; }
 
     }
