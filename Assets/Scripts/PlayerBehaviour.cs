@@ -87,12 +87,11 @@ public class PlayerBehaviour : MonoBehaviour {
 		if (collision.gameObject.tag == "Enemy" )
 			Application.LoadLevel ("GameOver");
 	}
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Ghost")
-            Application.LoadLevel("GameOver");
-    }
+	void OnTriggerEnter(Collider collision){
+		//Debug.Log ("We hit: " + collision.gameObject.name);
+		if (collision.gameObject.tag == "Ghost" )
+			Application.LoadLevel ("GameOver");
+	}
 
 }
 

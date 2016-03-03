@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Controler : MonoBehaviour
 {
 
@@ -226,7 +226,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
-                    GameData.Instance.points +=zombieScore;
+					ScoreManager.score+=zombieScore;
 
                 }
             }
@@ -242,7 +242,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
-                    GameData.Instance.points += zombieScore;
+					ScoreManager.score+=zombieScore;
                 }
             }
             else
@@ -257,7 +257,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
-                    GameData.Instance.points += zombieScore;
+					ScoreManager.score+=zombieScore;
                 }
             }
             else
@@ -272,7 +272,7 @@ public class Controler : MonoBehaviour
                 else
                 {
                     Destroy(enemies[i]);
-                    GameData.Instance.points += zombieScore;
+					ScoreManager.score+=zombieScore;
                 }
             }
 
@@ -506,7 +506,10 @@ public class Controler : MonoBehaviour
             if (rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position))
             {
                  Destroy(ghosts[i]);
-                 //cooldown = 2;
+				ScoreManager.score+=ghostScore;
+
+
+                 
             }
         }
 
