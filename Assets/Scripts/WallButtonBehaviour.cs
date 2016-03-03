@@ -3,13 +3,34 @@ using System.Collections;
 
 public class WallButtonBehaviour : MonoBehaviour {
 
+	private Renderer rend;
+	private Collider coll;
+	public GameObject wall;
+	
+	//public float time = 2f;
 	// Use this for initialization
 	void Start () {
-	
+		rend = wall.GetComponent<Renderer>();
+		coll = wall.GetComponent<Collider>();
+		//StartCoroutine (blinken(time));
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+	void OnCollisionEnter(Collision otherObject)
+	{
+		if(otherObject.gameObject.tag == "Player")
+		{
+			coll.enabled = false;
+			rend.enabled = false;
+			gameObject.GetComponent<Renderer>().enabled = false;
+			gameObject.GetComponent<Collider>().enabled = false;
+		}
+	}
+
+	//IEnumerator blinken(float ptime)
 }
