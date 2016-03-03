@@ -508,17 +508,18 @@ public class Controler : MonoBehaviour
     void DestroyGhosts()
     {
         GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        Debug.Log("Wielkosc tablicz: "+ghosts.Length);
 
-        for (int i = 0; i < ghosts.Length; i++)
-        {
-            if (rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position))
+            for (int i = 0; i < ghosts.Length; i++)
             {
-                Destroy(ghosts[i]);
-				ScoreManager.score+=ghostScore;
-                cooldown = 0;
-                
+                if (rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position) && ghosts[i]!=null)
+                {
+                    Destroy(ghosts[i]);
+                    ScoreManager.score += ghostScore;
+                    cooldown = 0;
+                }
             }
-        }
+
 
     }
 }
