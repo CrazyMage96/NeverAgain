@@ -15,6 +15,7 @@ public class Controler : MonoBehaviour
     public static float fixFaktor = 0f;
     public static float distance = 10f + fixFaktor;
     public float rangeToDestroy = 2;
+    //public float cooldown = -1; 
     /// <summary>
     /// ///
     /// </summary>
@@ -74,11 +75,14 @@ public class Controler : MonoBehaviour
         {
             SpawnGhosts();
             timeOut = false;
+            //cooldown--;
         }
+        
         if (destructionTime)
         {
             DestroyGhosts();
             destructionTime = false;
+            
         }
     }
 
@@ -496,13 +500,15 @@ public class Controler : MonoBehaviour
     void DestroyGhosts()
     {
         GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
-        
+
         for (int i = 0; i < ghosts.Length; i++)
         {
-            if(rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position))
+            if (rangeToDestroy >= Vector3.Distance(player.transform.position, ghosts[i].transform.position))
             {
-                Destroy(ghosts[i]);
+                 Destroy(ghosts[i]);
+                 //cooldown = 2;
             }
         }
+
     }
 }
