@@ -45,16 +45,20 @@ public class Controler : MonoBehaviour
     public bool change = false;
     public bool timeOut=false;
     public bool destructionTime = false;
-
+    private bool noMoreScore=false;
 
     // knows which platform has the player
 
     public int destination = 0; // platform player is at changed bz module
     public int zombieScore;
     public int ghostScore;
-
+    
     private static int cooldownMax = 2;
     private int cooldown = cooldownMax;
+
+    private static int cooldownPunishmenMax = 3;
+    private int cooldownPunishment = 0;
+    public int punishment = 1000;
 
     // platform array random choose method
     GameObject[] ManyModules;
@@ -73,12 +77,14 @@ public class Controler : MonoBehaviour
             SpawnZombies();
             change = false;
             destination = 0;
+            cooldownPunishment = 0;
         }
         if (timeOut)
         {
             SpawnGhosts();
             timeOut = false;
             cooldown++;
+            cooldownPunishment++;
         }
         if (cooldown < cooldownMax)
         {
@@ -93,6 +99,17 @@ public class Controler : MonoBehaviour
 
             }
         }
+        if(cooldownPunishment >= cooldownPunishmenMax)
+        {
+            if (ScoreManager.score >= punishment)
+            { ScoreManager.score -= punishment; }
+            else { ScoreManager.score = 0; }
+
+            cooldownPunishment = 0;
+        }
+
+
+
     }
 
     void Remove()

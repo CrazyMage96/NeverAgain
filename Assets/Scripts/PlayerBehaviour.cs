@@ -30,11 +30,13 @@ public class PlayerBehaviour : MonoBehaviour {
 			Application.LoadLevel ("GameOver");
 		}
         //destroying Ghosts
-        if (Input.GetKeyDown(KeyCode.Space))
+        bool input = Input.GetKeyDown(KeyCode.Space);
+        if (input)
         {
             GameObject placeholder = GameObject.FindGameObjectWithTag("GameController");
             Controler skript = placeholder.GetComponent<Controler>();
             skript.destructionTime = true;
+            input = false;
         }
 	}
 
