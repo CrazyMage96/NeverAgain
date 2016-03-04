@@ -9,7 +9,10 @@ public class PickUp : MonoBehaviour {
 	//private int x = 2;
 	
 	// Update is called once per frame
-
+    void Start()
+    {
+        controller = GameObject.FindGameObjectWithTag("GameController");
+    }
 	void OnTriggerEnter (Collider collision){
 		Controler script = controller.GetComponent<Controler> ();
 		Debug.Log("Collision detected");
