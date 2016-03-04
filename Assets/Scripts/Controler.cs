@@ -52,15 +52,11 @@ public class Controler : MonoBehaviour
     public int destination = 0; // platform player is at changed bz module
     public int zombieScore;
     public int ghostScore;
-<<<<<<< HEAD
+
 
     public static int cooldownMax = 2;  //removed static
     public int cooldown;
-=======
-    
-    private static int cooldownMax = 2;
-    private int cooldown = cooldownMax;
->>>>>>> origin/master
+
 
     private static int cooldownPunishmenMax = 3;
     private int cooldownPunishment = 0;
