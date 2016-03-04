@@ -53,12 +53,14 @@ public class Controler : MonoBehaviour
     public int zombieScore;
     public int ghostScore;
 
-    private static int cooldownMax = 2;
-    private int cooldown = cooldownMax;
+    public static int cooldownMax = 2;  //removed static
+    public int cooldown;
 
     // platform array random choose method
     GameObject[] ManyModules;
-
+	void Start(){
+		cooldown = cooldownMax;
+	}
     void Update()
     {
         if (change)

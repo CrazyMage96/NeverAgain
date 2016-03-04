@@ -17,7 +17,7 @@ public class TimerScript : MonoBehaviour {
         {
             timeLimit -= Time.deltaTime;
             transform.Translate(Vector3.back * Time.deltaTime, Space.World);
-            Debug.Log(timeLimit);
+           // Debug.Log(timeLimit);
         }
         else if (timeLimit < 1) {
             GameObject placeholder = GameObject.FindGameObjectWithTag("GameController");
