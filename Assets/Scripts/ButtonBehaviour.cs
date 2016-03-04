@@ -29,7 +29,7 @@ public class ButtonBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		startGame = GameObject.Find ("Canvas/Start Game");
+		startGame = GameObject.Find ("Canvas/StartGame");
 		helpText = GameObject.Find ("Canvas/helpText");
 		helpText.SetActive (false);
 	}
