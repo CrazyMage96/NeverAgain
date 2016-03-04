@@ -2,20 +2,19 @@ Checkliste:
 
 Must-Have:
 -Spielname
--Spielfigur: 1. Steuerung und Kamera
--Module: 1.Prefabs
--Graphik: 1. Texture
--Monster: 1.Ghosts 1.5 normale Monster 2. Zerstörung
--Animation
--Path-Finding
++Spielfigur: 1. Steuerung und Kamera
++Module: 1.Prefabs
++Graphik: 1. Texture
++Monster: 1.Ghosts 1.5 normale Monster 2. Zerstörung
++Animation
++Path-Finding
 -UI : 1.Platform (Stoppuhr)
--Infinity-Mode
--Menu
++Infinity-Mode
++Menu
 -Highscore
--Loser-Condition
++Loser-Condition
 
--verschwindende Plattforme
--Pause-Menu
++verschwindende Plattforme
 
 Would be nice to have:
 -Narrator
@@ -23,5 +22,5 @@ Would be nice to have:
 -special Modules
 -Fackeln aufsammeln um Lichtkegel zu vergrößern
 -fallende Plattforme
--Music
++Music
 
